@@ -37,7 +37,7 @@ export const GroupVariants: React.FC<GroupVariantsProps> = ({
                         "flex items-center justify-center cursor-pointer h-[30px] px-5 flex-1 rounded-3xl transition-all duration-400 text-sm",
                         {
                             "bg-white shadow": item.value === value,
-                            "text-gray-500 opacity-50 pointer-events-none":
+                            "text-gray-500 opacity-50 pointer-events-none rounded-none shadow-none bg-[#f3f3f3]":
                                 item.disabled,
                         }
                     )}

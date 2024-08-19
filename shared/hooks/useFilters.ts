@@ -23,9 +23,7 @@ interface ReturnProps extends QuerySearchParams {
     prices: PriceProps;
 }
 
-type FiltersProps = number;
-
-export const useFilters = (max: FiltersProps = 100): ReturnProps => {
+export const useFilters = (max: number = 100): ReturnProps => {
     // Get search params
     const searctParams = useSearchParams() as unknown as Map<
         keyof QuerySearchParams,
@@ -69,18 +67,21 @@ export const useFilters = (max: FiltersProps = 100): ReturnProps => {
         }
     };
 
-    return {
-        types,
-        sizes,
-        prices: {
-            priceFrom: prices.priceFrom,
-            priceTo: prices.priceTo,
-        },
-        selectedIngredients,
-        UpdatePrice,
-        toggleTypes,
-        toggleSizes,
-        toggleIngredients,
-        setPrices,
-    };
+    return React.useMemo(
+        () => ({
+            types,
+            sizes,
+            prices: {
+                priceFrom: prices.priceFrom,
+                priceTo: prices.priceTo,
+            },
+            selectedIngredients,
+            UpdatePrice,
+            toggleTypes,
+            toggleSizes,
+            toggleIngredients,
+            setPrices,
+        }),
+        [types, sizes, prices, selectedIngredients]
+    );
 };

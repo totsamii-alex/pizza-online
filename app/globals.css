@@ -80,3 +80,25 @@ html {
         @apply bg-background text-foreground;
     }
 }
+
+/* TailwindCSS - Google Places Autocomplete */
+
+.pac-container {
+    @apply bg-white shadow-lg rounded-lg z-50;
+}
+
+.pac-item {
+    @apply p-3 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer;
+}
+
+.pac-item:hover {
+    @apply bg-gray-100;
+}
+
+.pac-item .pac-item-query {
+    @apply font-bold;
+}
+
+.pac-matched {
+    @apply text-blue-500;
+}

@@ -28,7 +28,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({ className }) => {
             }
         },
         300,
-        [searchQuery]
+        [searchQuery, focused]
     );
 
     const onCLickItem = () => {

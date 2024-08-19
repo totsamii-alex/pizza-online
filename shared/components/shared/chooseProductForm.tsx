@@ -7,18 +7,20 @@ import { Button } from "../ui";
 interface ChooseProductFormProps {
     imageUrl: string;
     name: string;
-    onSubmit?: (itemId: number, ingredients: number[]) => void;
+    price: number;
+    loading?: boolean;
+    onSubmit: () => void;
     className?: string;
 }
 
 export const ChooseProductForm: React.FC<ChooseProductFormProps> = ({
     imageUrl,
     name,
-    onSubmit,
+    price,
+    loading,
     className,
+    onSubmit,
 }) => {
-    const textDetails = "30 cm, traditional dought, 590 gr";
-    const totalPrice = "300 zł";
     return (
         <div className={cn("flex flex-1", className)}>
             <div
@@ -44,10 +46,12 @@ export const ChooseProductForm: React.FC<ChooseProductFormProps> = ({
             <div className="w-[490px] bg-[#f6f6f6] p-7">
                 <Title text={name} size={"md"} className="font-bold mb-1" />
 
-                <p className="text-gray-400">{textDetails}</p>
-
-                <Button className="mt-10 w-full">
-                    Add to cart for {totalPrice}
+                <Button
+                    loading={loading}
+                    onClick={() => onSubmit()}
+                    className="mt-10 w-full"
+                >
+                    Add to cart for {price} zł
                 </Button>
             </div>
         </div>

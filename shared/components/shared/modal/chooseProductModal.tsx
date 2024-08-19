@@ -1,14 +1,13 @@
 "use client";
 
+import { ProductWithRelations } from "@/@types/prisma";
 import { Dialog } from "@/shared/components/ui";
 import { DialogContent } from "@/shared/components/ui/dialog";
-import React from "react";
 import { cn } from "@/shared/lib/utils";
-import { useRouter } from "next/navigation";
-import { ChooseProductForm } from "../chooseProductForm";
-import { ProductWithRelations } from "@/@types/prisma";
-import { ChoosePizzaForm } from "../choosePizzaForm";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { ProductForm } from "../productForm";
 
 interface ChooseProductModalProps {
     product: ProductWithRelations;
@@ -20,7 +19,6 @@ export const ChooseProductModal: React.FC<ChooseProductModalProps> = ({
     className,
 }) => {
     const router = useRouter();
-    const isPizzaForm = Boolean(product.items[0].pizzaType);
 
     return (
         <div className={className}>
@@ -33,19 +31,10 @@ export const ChooseProductModal: React.FC<ChooseProductModalProps> = ({
                 >
                     <DialogTitle className="hidden" />
 
-                    {isPizzaForm ? (
-                        <ChoosePizzaForm
-                            imageUrl={product.imageUrl}
-                            name={product.name}
-                            ingredients={product.ingredients}
-                            items={product.items}
-                        />
-                    ) : (
-                        <ChooseProductForm
-                            imageUrl={product.imageUrl}
-                            name={product.name}
-                        />
-                    )}
+                    <ProductForm
+                        product={product}
+                        onClick={() => router.back()}
+                    />
                 </DialogContent>
             </Dialog>
         </div>

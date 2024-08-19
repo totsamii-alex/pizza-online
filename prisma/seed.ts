@@ -94,7 +94,8 @@ async function up() {
 
     await prisma.productItem.createMany({
         data: [
-            // Пицца "Пепперони фреш"
+            // Pizzas
+            // 1
             generateProductItem({
                 productId: pizza1.id,
                 pizzaType: 1,
@@ -111,7 +112,7 @@ async function up() {
                 size: 40,
             }),
 
-            // Пицца "Сырная"
+            // 2
             generateProductItem({
                 productId: pizza2.id,
                 pizzaType: 1,
@@ -143,24 +144,14 @@ async function up() {
                 size: 40,
             }),
 
-            // Пицца "Чоризо фреш"
-            generateProductItem({
-                productId: pizza3.id,
-                pizzaType: 1,
-                size: 20,
-            }),
-            generateProductItem({
-                productId: pizza3.id,
-                pizzaType: 2,
-                size: 30,
-            }),
+            // 3
             generateProductItem({
                 productId: pizza3.id,
                 pizzaType: 2,
                 size: 40,
             }),
 
-            // Остальные продукты
+            // Other products
             generateProductItem({ productId: 1 }),
             generateProductItem({ productId: 2 }),
             generateProductItem({ productId: 3 }),
