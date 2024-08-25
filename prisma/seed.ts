@@ -1,27 +1,86 @@
 import { hashSync } from "bcrypt";
 import { prisma } from "./prismaClient";
-import { categories, ingredients, products } from "./constans";
-import { Prisma } from "@prisma/client";
+import { categories, ingredients, products, pizzas } from "./constans";
+import { Prisma, Product, StoryItemType } from "@prisma/client";
 
-const randoNumber = (min: number, max: number) => {
+function getRandomIngredients(): number[] {
+    const ingredients = Array.from({ length: 18 }, (_, index) => index + 1); // Массив от 1 до 18
+    return ingredients.filter(() => Math.random() > 0.5);
+}
+
+const randoNumber = (min: number, max: number): number => {
     return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
 };
 
-const generateProductItem = ({
+function getRandomSubarray(): number[] {
+    const arr = [1, 2, 3, 4, 5, 6];
+    const result = [];
+
+    for (const num of arr) {
+        if (Math.random() > 0.5) {
+            result.push(num);
+        }
+    }
+
+    return result.length > 0 ? result : getRandomSubarray();
+}
+
+const generateProductItem = ({ productId }: { productId: number }) => {
+    return {
+        productId,
+        price: randoNumber(10, 30),
+    } as Prisma.ProductItemUncheckedCreateInput;
+};
+
+const generatePizzaItems = ({
     productId,
-    pizzaType,
-    size,
 }: {
     productId: number;
     pizzaType?: 1 | 2;
     size?: 20 | 30 | 40;
 }) => {
-    return {
-        productId,
-        price: randoNumber(190, 600),
-        pizzaType,
-        size,
-    } as Prisma.ProductItemUncheckedCreateInput;
+    const pizzas: Prisma.ProductItemUncheckedCreateInput[] = [
+        {
+            productId,
+            price: randoNumber(30, 40),
+            pizzaType: 1,
+            size: 20,
+        },
+        {
+            productId,
+            price: randoNumber(40, 60),
+            pizzaType: 1,
+            size: 30,
+        },
+        {
+            productId,
+            price: randoNumber(60, 90),
+            pizzaType: 1,
+            size: 40,
+        },
+        {
+            productId,
+            price: randoNumber(25, 35),
+            pizzaType: 2,
+            size: 20,
+        },
+        {
+            productId,
+            price: randoNumber(35, 50),
+            pizzaType: 2,
+            size: 30,
+        },
+        {
+            productId,
+            price: randoNumber(50, 70),
+            pizzaType: 2,
+            size: 40,
+        },
+    ];
+
+    const getRandom = getRandomSubarray();
+
+    return pizzas.filter((_, index) => getRandom.includes(index + 1));
 };
 
 async function up() {
@@ -52,123 +111,83 @@ async function up() {
         data: ingredients,
     });
 
+    // create pizzas
+    await prisma.product.createMany({
+        data: pizzas.map((pizza) => ({ ...pizza, categoryId: 1 })),
+    });
+
+    // create other products
     await prisma.product.createMany({
         data: products,
     });
 
-    const pizza1 = await prisma.product.create({
-        data: {
-            name: "Pepperoni Fresh",
-            imageUrl:
-                "https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp",
-            categoryId: 1,
-            ingredients: {
-                connect: ingredients.slice(0, 5),
-            },
-        },
+    // adding ingredients to pizzas
+    const pizzasWithoutIngredients = await prisma.product.findMany({
+        where: { categoryId: 1 },
     });
 
-    const pizza2 = await prisma.product.create({
-        data: {
-            name: "Cheese",
-            imageUrl:
-                "https://media.dodostatic.net/image/r:233x233/11EE7D610CF7E265B7C72BE5AE757CA7.webp",
-            categoryId: 1,
-            ingredients: {
-                connect: ingredients.slice(5, 10),
-            },
-        },
-    });
+    for (const pizza of pizzasWithoutIngredients) {
+        const ingredientIds = getRandomIngredients();
 
-    const pizza3 = await prisma.product.create({
-        data: {
-            name: "Chorizo Fresh",
-            imageUrl:
-                "https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp",
-            categoryId: 1,
-            ingredients: {
-                connect: ingredients.slice(10, 18),
+        await prisma.product.update({
+            where: { id: pizza.id },
+            data: {
+                ingredients: {
+                    connect: ingredientIds.map((id) => ({ id })),
+                },
             },
-        },
-    });
+        });
+    }
 
     await prisma.productItem.createMany({
         data: [
             // Pizzas
-            // 1
-            generateProductItem({
-                productId: pizza1.id,
-                pizzaType: 1,
-                size: 20,
-            }),
-            generateProductItem({
-                productId: pizza1.id,
-                pizzaType: 2,
-                size: 30,
-            }),
-            generateProductItem({
-                productId: pizza1.id,
-                pizzaType: 2,
-                size: 40,
-            }),
+            ...Array.from({ length: 21 }, (_, index) =>
+                generatePizzaItems({
+                    productId: index + 1,
+                })
+            ).flat(),
 
-            // 2
-            generateProductItem({
-                productId: pizza2.id,
-                pizzaType: 1,
-                size: 20,
-            }),
-            generateProductItem({
-                productId: pizza2.id,
-                pizzaType: 1,
-                size: 30,
-            }),
-            generateProductItem({
-                productId: pizza2.id,
-                pizzaType: 1,
-                size: 40,
-            }),
-            generateProductItem({
-                productId: pizza2.id,
-                pizzaType: 2,
-                size: 20,
-            }),
-            generateProductItem({
-                productId: pizza2.id,
-                pizzaType: 2,
-                size: 30,
-            }),
-            generateProductItem({
-                productId: pizza2.id,
-                pizzaType: 2,
-                size: 40,
-            }),
+            // breakfast
+            ...Array.from({ length: 7 }, (_, index) =>
+                generateProductItem({ productId: index + 1 + 21 })
+            ),
 
-            // 3
-            generateProductItem({
-                productId: pizza3.id,
-                pizzaType: 2,
-                size: 40,
-            }),
+            // snacks
+            ...Array.from({ length: 17 }, (_, index) =>
+                generateProductItem({ productId: index + 1 + 21 + 7 })
+            ),
 
-            // Other products
-            generateProductItem({ productId: 1 }),
-            generateProductItem({ productId: 2 }),
-            generateProductItem({ productId: 3 }),
-            generateProductItem({ productId: 4 }),
-            generateProductItem({ productId: 5 }),
-            generateProductItem({ productId: 6 }),
-            generateProductItem({ productId: 7 }),
-            generateProductItem({ productId: 8 }),
-            generateProductItem({ productId: 9 }),
-            generateProductItem({ productId: 10 }),
-            generateProductItem({ productId: 11 }),
-            generateProductItem({ productId: 12 }),
-            generateProductItem({ productId: 13 }),
-            generateProductItem({ productId: 14 }),
-            generateProductItem({ productId: 15 }),
-            generateProductItem({ productId: 16 }),
-            generateProductItem({ productId: 17 }),
+            // cocktails
+            ...Array.from({ length: 4 }, (_, index) =>
+                generateProductItem({ productId: index + 1 + 21 + 7 + 17 })
+            ),
+
+            // coffe
+            ...Array.from({ length: 7 }, (_, index) =>
+                generateProductItem({ productId: index + 1 + 21 + 7 + 17 + 4 })
+            ),
+
+            // desserts
+            ...Array.from({ length: 12 }, (_, index) =>
+                generateProductItem({
+                    productId: index + 1 + 21 + 7 + 17 + 4 + 7,
+                })
+            ),
+
+            // drinks
+            ...Array.from({ length: 7 }, (_, index) =>
+                generateProductItem({
+                    productId: index + 1 + 21 + 7 + 17 + 4 + 7 + 12,
+                })
+            ),
+
+            // sauces
+            ...Array.from({ length: 4 }, (_, index) =>
+                generateProductItem({
+                    productId: index + 1 + 21 + 7 + 17 + 4 + 7 + 12 + 7,
+                })
+            ),
         ],
     });
 
@@ -197,6 +216,104 @@ async function up() {
             },
         },
     });
+
+    await prisma.story.createMany({
+        data: [
+            {
+                previewImageUrl: "/assets/story/st-1.jpg",
+            },
+            {
+                previewImageUrl: "/assets/story/st-2.jpg",
+            },
+            {
+                previewImageUrl: "/assets/story/st-3.jpg",
+            },
+            {
+                previewImageUrl: "/assets/story/st-4.jpg",
+            },
+            {
+                previewImageUrl: "/assets/story/st-5.jpg",
+            },
+            {
+                previewImageUrl: "/assets/story/st-6.jpg",
+            },
+        ],
+    });
+
+    await prisma.storyItem.createMany({
+        data: [
+            {
+                storyId: 1,
+                sourceUrl: "/assets/story/group-1/pizza-grill-1.mp4",
+                type: StoryItemType.VIDEOS,
+            },
+            {
+                storyId: 1,
+                sourceUrl: "/assets/story/group-1/delicious-pizza-1.mp4",
+                type: StoryItemType.VIDEOS,
+            },
+            {
+                storyId: 1,
+                sourceUrl: "/assets/story/group-1/pizza-party-1.mp4",
+                type: StoryItemType.VIDEOS,
+            },
+            {
+                storyId: 2,
+                sourceUrl: "/assets/story/group-2/pizza-design-2.mp4",
+                type: StoryItemType.VIDEOS,
+            },
+            {
+                storyId: 2,
+                sourceUrl: "/assets/story/group-2/pizza-special-2.jpg",
+                type: StoryItemType.IMAGES,
+            },
+            {
+                storyId: 3,
+                sourceUrl: "/assets/story/group-3/delicious-food-3.jpg",
+                type: StoryItemType.IMAGES,
+            },
+            {
+                storyId: 3,
+                sourceUrl: "/assets/story/group-3/pizza-3.jpg",
+                type: StoryItemType.IMAGES,
+            },
+            {
+                storyId: 3,
+                sourceUrl: "/assets/story/group-3/pizza-design-3.mp4",
+                type: StoryItemType.VIDEOS,
+            },
+            {
+                storyId: 3,
+                sourceUrl: "/assets/story/group-3/pizza-special-3.jpg",
+                type: StoryItemType.IMAGES,
+            },
+            {
+                storyId: 4,
+                sourceUrl: "/assets/story/group-4/dilicious-pizza-4.mp4",
+                type: StoryItemType.VIDEOS,
+            },
+            {
+                storyId: 5,
+                sourceUrl: "/assets/story/group-5/restaurant-food-5.jpg",
+                type: StoryItemType.IMAGES,
+            },
+            {
+                storyId: 5,
+                sourceUrl: "/assets/story/group-5/restaurant-food-menu-5.jpg",
+                type: StoryItemType.IMAGES,
+            },
+            {
+                storyId: 6,
+                sourceUrl: "/assets/story/group-6/cappuccino-video-6.mp4",
+                type: StoryItemType.VIDEOS,
+            },
+            {
+                storyId: 6,
+                sourceUrl: "/assets/story/group-6/milk-tea-menu-6.mp4",
+                type: StoryItemType.VIDEOS,
+            },
+        ],
+    });
 }
 
 async function down() {
@@ -207,6 +324,8 @@ async function down() {
     await prisma.$executeRaw`TRUNCATE TABLE "Ingredient" RESTART IDENTITY CASCADE`;
     await prisma.$executeRaw`TRUNCATE TABLE "Product" RESTART IDENTITY CASCADE`;
     await prisma.$executeRaw`TRUNCATE TABLE "ProductItem" RESTART IDENTITY CASCADE`;
+    await prisma.$executeRaw`TRUNCATE TABLE "Story" RESTART IDENTITY CASCADE`;
+    await prisma.$executeRaw`TRUNCATE TABLE "StoryItem" RESTART IDENTITY CASCADE`;
 }
 
 async function main() {

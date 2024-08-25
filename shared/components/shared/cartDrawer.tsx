@@ -138,7 +138,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren<CartDrawerProps>> = ({
                                         <Link href="/checkout">
                                             <Button
                                                 type="submit"
-                                                className="w-full h-12 text-base"
+                                                className="relative overflow-hidden w-full h-12 text-base"
                                                 loading={redirecting}
                                                 onClick={() =>
                                                     setRedirecting(true)
@@ -146,6 +146,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren<CartDrawerProps>> = ({
                                             >
                                                 Place an order
                                                 <ArrowRight className="w-5 ml-2" />
+                                                <div className="flare"></div>
                                             </Button>
                                         </Link>
                                     </div>

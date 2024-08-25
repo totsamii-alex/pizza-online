@@ -25,7 +25,7 @@ export const GroupVariants: React.FC<GroupVariantsProps> = ({
     return (
         <div
             className={cn(
-                "flex justify-between rounded-3xl p-1 select-none bg-[#f3f3f3]",
+                "flex justify-between rounded-3xl p-1 select-none bg-[#dcdcdc]",
                 className
             )}
         >
@@ -34,10 +34,10 @@ export const GroupVariants: React.FC<GroupVariantsProps> = ({
                     key={item.name}
                     onClick={() => onClick?.(item.value)}
                     className={cn(
-                        "flex items-center justify-center cursor-pointer h-[30px] px-5 flex-1 rounded-3xl transition-all duration-400 text-sm",
+                        "flex items-center justify-center cursor-pointer h-[30px] px-5 flex-1 rounded-3xl transition-all duration-400 text-md",
                         {
                             "bg-white shadow": item.value === value,
-                            "text-gray-500 opacity-50 pointer-events-none rounded-none shadow-none bg-[#f3f3f3]":
+                            "text-gray-500 opacity-50 pointer-events-none rounded-none shadow-none bg-[#dcdcdc]":
                                 item.disabled,
                         }
                     )}

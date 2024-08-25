@@ -15,24 +15,42 @@ import {
 } from "@/shared/components";
 import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
+import { Api } from "@/shared/services/apiClient";
 
 export default function CheckoutPage() {
     const [submitting, setSubmitting] = React.useState(false);
+    const { data: session, status } = useSession();
+    const { items, totalAmount, removeCartItem, loading, onClickCountButton } =
+        useCart();
 
     const form = useForm<CheckoutFormValues>({
         resolver: zodResolver(checkoutFormSchema),
         defaultValues: {
+            email: "",
             firstName: "",
             lastName: "",
-            email: "",
             phone: "",
             address: "",
             comment: "",
         },
     });
 
-    const { items, totalAmount, removeCartItem, loading, onClickCountButton } =
-        useCart();
+    React.useEffect(() => {
+        async function fetchUserInfo() {
+            const data = await Api.auth.getMe();
+
+            const [firstName, lastName] = data.fullname.split(" ");
+
+            form.setValue("firstName", firstName);
+            form.setValue("lastName", lastName);
+            form.setValue("email", data.email);
+        }
+
+        if (session) {
+            fetchUserInfo();
+        }
+    }, [session, form]);
 
     const onSubmit: SubmitHandler<CheckoutFormValues> = async (data) => {
         try {
@@ -79,7 +97,7 @@ export default function CheckoutPage() {
 
                             <CheckoutPersonalForm
                                 className={
-                                    loading
+                                    status === "loading"
                                         ? "opacity-40 pointer-events-none"
                                         : ""
                                 }
@@ -87,7 +105,7 @@ export default function CheckoutPage() {
 
                             <CheckoutAddressForm
                                 className={
-                                    loading
+                                    status === "loading"
                                         ? "opacity-40 pointer-events-none"
                                         : ""
                                 }

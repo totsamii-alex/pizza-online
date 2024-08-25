@@ -47,7 +47,13 @@ export const ProductsGroupList: React.FC<ProductsGroupListProps> = ({
                         key={item.id}
                         name={item.name}
                         price={item.items[0].price}
-                        ingredients={item.ingredients}
+                        details={item.details || undefined}
+                        description={item.description || undefined}
+                        ingredients={
+                            item.ingredients.length > 0
+                                ? item.ingredients
+                                : undefined
+                        }
                     />
                 ))}
             </div>

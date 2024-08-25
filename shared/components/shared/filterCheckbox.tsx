@@ -1,7 +1,8 @@
 import React from "react";
 import { Checkbox } from "../ui/checkbox";
+import { cn } from "@/shared/lib/utils";
 
-export interface FilterChecboxProps {
+export interface FilterCheckboxProps {
     text: string;
     value: string;
     name?: string;
@@ -10,7 +11,7 @@ export interface FilterChecboxProps {
     checked?: boolean;
 }
 
-export const FilterCheckbox: React.FC<FilterChecboxProps> = ({
+export const FilterCheckbox: React.FC<FilterCheckboxProps> = ({
     text,
     value,
     name,
@@ -19,7 +20,14 @@ export const FilterCheckbox: React.FC<FilterChecboxProps> = ({
     checked,
 }) => {
     return (
-        <div className="flex items-center space-x-2">
+        <div
+            className={cn(
+                "flex items-center space-x-2 p-2 rounded-md transition-colors duration-200",
+                {
+                    "bg-gray-100": checked,
+                }
+            )}
+        >
             <Checkbox
                 onCheckedChange={onCheckedChange}
                 checked={checked}
@@ -29,7 +37,13 @@ export const FilterCheckbox: React.FC<FilterChecboxProps> = ({
             />
             <label
                 htmlFor={`checkbox-${String(name)}-${String(value)}`}
-                className="leading-none cursor-pointer flex-1"
+                className={cn(
+                    "leading-none cursor-pointer flex-1 text-gray-800 transition-colors duration-200",
+                    {
+                        "hover:text-primary": !checked,
+                        "text-primary": checked,
+                    }
+                )}
             >
                 {text}
             </label>

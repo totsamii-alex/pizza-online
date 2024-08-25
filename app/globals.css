@@ -102,3 +102,74 @@ html {
 .pac-matched {
     @apply text-blue-500;
 }
+
+/* top loader */
+#nprogress .bar {
+    @apply bg-primary !important;
+}
+
+#nprogress .peg {
+    @apply shadow-md shadow-primary !important;
+}
+
+#nprogress .spinner-icon {
+    @apply border-t-primary border-l-primary !important;
+}
+
+/* stories */
+.story-image {
+    @apply w-full h-full object-cover object-center;
+}
+
+/* animations shine */
+@layer components {
+    .flare {
+        position: absolute;
+        content: "";
+        width: 20px;
+        height: 200px;
+        background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.5) 0%,
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 255, 255, 0.5) 100%
+        );
+        left: -40px;
+        top: -100px;
+        transform: rotate(45deg);
+        animation: movingFlare 3s ease-in-out 0.05s infinite;
+        z-index: 1;
+    }
+
+    @keyframes movingFlare {
+        0% {
+            left: -30px;
+            margin-left: 0px;
+        }
+        30% {
+            left: 110%;
+            margin-left: 80px;
+        }
+        100% {
+            left: 110%;
+            margin-left: 80px;
+        }
+    }
+}
+
+@layer components {
+    .scrollbar-none {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    /* Webkit-based browsers */
+    .scrollbar-none::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Overscroll behavior */
+    .overscroll-contain {
+        overscroll-behavior: contain;
+    }
+}

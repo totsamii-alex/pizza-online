@@ -17,12 +17,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET as string;
 
-export const config = {
-    api: {
-        bodyParser: false,
-    },
-};
-
 export async function POST(req: NextRequest) {
     const sig = req.headers.get("stripe-signature") as string;
 
@@ -63,8 +57,6 @@ export async function POST(req: NextRequest) {
 
     switch (event.type) {
         case "checkout.session.completed":
-            console.log("Payment completed");
-
             await prisma.order.update({
                 where: { id: Number(order.id) },
                 data: { status: OrderStatus.SUCCEEDED },
@@ -81,8 +73,6 @@ export async function POST(req: NextRequest) {
             break;
 
         case "checkout.session.async_payment_failed":
-            console.log("Payment async_payment_failed");
-
             await prisma.order.update({
                 where: { id: Number(order.id) },
                 data: { status: OrderStatus.CANCELLED },
@@ -97,8 +87,6 @@ export async function POST(req: NextRequest) {
             break;
 
         case "checkout.session.async_payment_succeeded":
-            console.log("Payment async_payment_succeeded");
-
             await sendEmail(
                 order.email,
                 "Next Pizza / Your order is being processed 🛠️",
@@ -108,8 +96,6 @@ export async function POST(req: NextRequest) {
             break;
 
         case "checkout.session.expired":
-            console.log("Payment expired");
-
             await prisma.order.update({
                 where: { id: Number(order.id) },
                 data: { status: OrderStatus.EXPIRED },

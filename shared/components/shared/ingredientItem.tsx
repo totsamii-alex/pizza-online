@@ -23,8 +23,11 @@ export const IngredientItem: React.FC<Props> = ({
     return (
         <div
             className={cn(
-                "flex items-center flex-col p-1 rounded-md w-32 text-center relative cursor-pointer shadow-md bg-white",
-                { "outline outline-2 outline-[hsl(22,100%,50%)]": active },
+                "flex items-center flex-col p-1 rounded-md w-32 text-center relative cursor-pointer shadow-md bg-white transition-transform transform-gpu",
+                {
+                    "outline outline-2 outline-[hsl(22,100%,50%)]": active,
+                    "hover:shadow-lg hover:scale-105": !active,
+                },
                 className
             )}
             onClick={onClick}
@@ -35,7 +38,7 @@ export const IngredientItem: React.FC<Props> = ({
 
             <Image width={110} height={110} src={imageUrl} alt={name} />
             <span className="text-xs mb-1">{name}</span>
-            <span className="font-bold">{price} ₽</span>
+            <span className="font-bold">{price} zł</span>
         </div>
     );
 };

@@ -6,7 +6,7 @@ import { WhiteBlock } from "./whiteBlock";
 import { CheckoutItemDetails } from "./checkoutItemDetails";
 
 const VAT = 10;
-const DELIVERY_PRICE = 12;
+const DELIVERY_PRICE = 6;
 
 interface CheckoutSidebarProps {
     totalAmount: number;
@@ -30,7 +30,7 @@ export const CheckoutSidebar: React.FC<CheckoutSidebarProps> = ({
                     <Skeleton className="h-11 w-48" />
                 ) : (
                     <span className="h-11 text-[34px] font-extrabold">
-                        {totalPrice} zł
+                        {totalAmount !== 0 ? totalPrice : totalAmount} zł
                     </span>
                 )}
             </div>
@@ -84,10 +84,13 @@ export const CheckoutSidebar: React.FC<CheckoutSidebarProps> = ({
             <Button
                 loading={loading}
                 type="submit"
-                className="w-full h-14 rounded-2xl mt-6 text-base font-bold"
+                className="relative overflow-hidden w-full h-14 rounded-2xl mt-6 text-base font-bold"
+                disabled={totalAmount === 0}
             >
                 Proceed to payment
                 <ArrowRight className="w-5 ml-2" />
+
+                {totalAmount !== 0 && <div className="flare"></div>}
             </Button>
         </WhiteBlock>
     );

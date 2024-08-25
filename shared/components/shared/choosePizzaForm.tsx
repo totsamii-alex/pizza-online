@@ -22,6 +22,7 @@ interface ChoosePizzaFormProps {
     name: string;
     ingredients: Ingredient[];
     items: ProductItem[];
+    description?: string;
     loading?: boolean;
     onBack?: () => void;
     onSubmit: (itemId: number, ingredients: number[]) => void;
@@ -33,6 +34,7 @@ export const ChoosePizzaForm: React.FC<ChoosePizzaFormProps> = ({
     name,
     ingredients,
     items,
+    description,
     loading,
     onSubmit,
     onBack,
@@ -69,10 +71,12 @@ export const ChoosePizzaForm: React.FC<ChoosePizzaFormProps> = ({
         <div className={cn("flex flex-1", className)}>
             <ProductImage imageUrl={imageUrl} size={size} />
 
-            <div className="w-[490px] bg-[#F4F1EE] p-7">
+            <div className="w-[50%] bg-[#F4F1EE] p-7">
                 <Title text={name} size={"md"} className="font-bold mb-1" />
 
-                <p className="text-gray-400">{textDetails}</p>
+                <p className="text-xl">{textDetails}</p>
+
+                {description && <p className="text-gray-400">{description}</p>}
 
                 <div className="flex flex-col gap-2 mt-4">
                     <GroupVariants
@@ -86,6 +90,12 @@ export const ChoosePizzaForm: React.FC<ChoosePizzaFormProps> = ({
                         onClick={(value) => setType(Number(value) as PizzaType)}
                     />
                 </div>
+
+                <Title
+                    text="Additional Ingredients"
+                    size={"sm"}
+                    className="font-bold mt-7"
+                />
 
                 <div className="bg-gray-50 p-5 h-[420px] overflow-auto scrollbar mt-5">
                     <div className="grid grid-cols-3 gap-3">
@@ -103,12 +113,14 @@ export const ChoosePizzaForm: React.FC<ChoosePizzaFormProps> = ({
                 <Button
                     loading={loading}
                     onClick={handleSubmit}
-                    className="mt-10 w-full"
+                    className="relative overflow-hidden w-full mt-10"
                     disabled={totalPrice === 0}
                 >
                     {totalPrice
                         ? `Add to cart for ${totalPrice} zł`
                         : `Add to cart`}
+
+                    <div className="flare"></div>
                 </Button>
             </div>
         </div>

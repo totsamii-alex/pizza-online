@@ -23,7 +23,7 @@ export const Categories: React.FC<CategoriesProps> = ({ items, className }) => {
             {items.map(({ name, id }) => (
                 <a
                     className={cn(
-                        "flex items-center font-bold h-11 rounded-2xl px-5 ",
+                        "flex items-center font-bold h-11 rounded-2xl px-5 hover:bg-white hover:shadow-md hover:shadow-gray-200",
                         activeCategoryId === id &&
                             "bg-white shadow-md shadow-gray-200 text-primary"
                     )}

@@ -8,9 +8,9 @@
         "start": "next start",
         "lint": "next lint",
         "prisma:push": "prisma db push",
-        "prisma:generate": "prisma db generate",
         "prisma:studio": "prisma studio",
-        "prisma:seed": "prisma db seed"
+        "prisma:seed": "prisma db seed",
+        "postinstall": "prisma generate"
     },
     "prisma": {
         "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -27,7 +27,6 @@
         "@react-google-maps/api": "^2.19.3",
         "@stripe/react-stripe-js": "^2.8.0",
         "@stripe/stripe-js": "^4.3.0",
-        "@types/bcrypt": "^5.0.2",
         "@types/qs": "^6.9.15",
         "@types/stripe": "^8.0.417",
         "axios": "^1.7.3",
@@ -37,12 +36,15 @@
         "lucide-react": "^0.424.0",
         "micro": "^10.0.1",
         "next": "14.2.5",
+        "next-auth": "^4.24.7",
+        "nextjs-toploader": "^1.6.12",
         "prisma": "^5.17.0",
         "qs": "^6.13.0",
         "react": "^18",
         "react-dom": "^18",
         "react-hook-form": "^7.52.2",
         "react-hot-toast": "^2.4.1",
+        "react-insta-stories": "^2.7.0",
         "react-use": "^17.5.1",
         "resend": "^4.0.0",
         "stripe": "^16.8.0",
@@ -53,6 +55,7 @@
         "zustand": "^4.5.4"
     },
     "devDependencies": {
+        "@types/bcrypt": "^5.0.2",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",

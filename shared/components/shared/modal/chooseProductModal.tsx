@@ -1,13 +1,14 @@
 "use client";
 
 import { ProductWithRelations } from "@/@types/prisma";
-import { Dialog } from "@/shared/components/ui";
-import { DialogContent } from "@/shared/components/ui/dialog";
 import { cn } from "@/shared/lib/utils";
-import { DialogTitle } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { ProductForm } from "../productForm";
+
+import { Dialog } from "@/shared/components/ui";
+import { DialogContent } from "@/shared/components/ui/dialog";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 interface ChooseProductModalProps {
     product: ProductWithRelations;

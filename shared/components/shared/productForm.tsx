@@ -46,6 +46,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             name={product.name}
             ingredients={product.ingredients}
             items={product.items}
+            description={product.description ? product.description : undefined}
             onSubmit={onSubmit}
             loading={loading}
         />
@@ -54,6 +55,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             imageUrl={product.imageUrl}
             name={product.name}
             price={product.items[0].price}
+            details={product.details ? product.details : undefined}
+            description={product.description ? product.description : undefined}
             onSubmit={onSubmit}
             loading={loading}
         />

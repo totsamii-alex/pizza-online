@@ -4,12 +4,17 @@ import {
     Title,
     Container,
     ProductsGroupList,
+    Stories,
 } from "@/shared/components/shared";
 import { Suspense } from "react";
 import { findPizzas } from "@/shared/lib";
 import { GetSearchParams } from "@/shared/lib/findPizzas";
 
-export default async function Home({searchParams }: {searchParams: GetSearchParams }) {
+export default async function Home({
+    searchParams,
+}: {
+    searchParams: GetSearchParams;
+}) {
     const categories = await findPizzas(searchParams);
 
     return (
@@ -23,6 +28,8 @@ export default async function Home({searchParams }: {searchParams: GetSearchPara
                     (category) => category.products.length > 0
                 )}
             />
+
+            <Stories />
 
             <Container className="mt-10 pb-14">
                 <div className="flex gap-20">

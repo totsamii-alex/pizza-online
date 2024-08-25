@@ -9,12 +9,12 @@ datasource db {
 }
 
 model User {
-    id       Int      @id @default(autoincrement())
+    id       Int       @id @default(autoincrement())
     fullname String
-    email    String   @unique
+    email    String    @unique
     password String
-    role     UserRole @default(USER)
-    verified DateTime
+    role     UserRole  @default(USER)
+    verified DateTime?
 
     provider   String?
     providerId String?
@@ -37,9 +37,11 @@ model Category {
 }
 
 model Product {
-    id       Int    @id @default(autoincrement())
-    name     String
-    imageUrl String
+    id          Int     @id @default(autoincrement())
+    name        String
+    imageUrl    String
+    details     String?
+    description String?
 
     category   Category @relation(fields: [categoryId], references: [id])
     categoryId Int
@@ -144,11 +146,32 @@ model VerificationCode {
     user   User @relation(fields: [userId], references: [id])
     userId Int  @unique
 
-    code String @unique
+    code String
 
     createdAt DateTime @default(now())
 
     @@unique([userId, code])
+}
+
+model Story {
+    id              Int    @id @default(autoincrement())
+    previewImageUrl String
+
+    items StoryItem[]
+
+    createdAt DateTime @default(now())
+}
+
+model StoryItem {
+    id   Int           @id @default(autoincrement())
+    type StoryItemType @default(IMAGES)
+
+    story   Story @relation(fields: [storyId], references: [id])
+    storyId Int
+
+    sourceUrl String
+
+    createdAt DateTime @default(now())
 }
 
 enum OrderStatus {
@@ -161,4 +184,9 @@ enum OrderStatus {
 enum UserRole {
     USER
     ADMIN
+}
+
+enum StoryItemType {
+    IMAGES
+    VIDEOS
 }

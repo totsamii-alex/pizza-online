@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { FilterChecboxProps } from "./filterCheckbox";
+import { FilterCheckboxProps } from "./filterCheckbox";
 import { Input, Skeleton } from "../ui";
 import { FilterCheckbox } from ".";
 
-type Item = FilterChecboxProps;
+type Item = FilterCheckboxProps;
 
 interface CheckboxFiltersGroupProps {
     title: string;
@@ -48,11 +48,11 @@ export const CheckboxFiltersGroup: React.FC<CheckboxFiltersGroupProps> = ({
                 <p className="font-bold mb-3">{title}</p>
 
                 {Array.from({ length: limit }).map((_, index) => (
-                    <Skeleton key={index} className="h-6 mb-4 rounded-sm" />
+                    <Skeleton key={index} className="h-7 mb-4 rounded-sm" />
                 ))}
 
                 {name === "ingredient" && (
-                    <Skeleton className="w-28 h-6 rounded-sm" />
+                    <Skeleton className="w-28 h-7 rounded-sm" />
                 )}
             </div>
         );
@@ -78,7 +78,7 @@ export const CheckboxFiltersGroup: React.FC<CheckboxFiltersGroupProps> = ({
                 </div>
             )}
 
-            <div className="flex flex-col gap-4 max-h-96 pr-2 overflow-auto scrollbar">
+            <div className="flex flex-col gap-1 max-h-96 pr-2 overflow-auto scrollbar">
                 {list.map((item, index) => (
                     <FilterCheckbox
                         key={index}
