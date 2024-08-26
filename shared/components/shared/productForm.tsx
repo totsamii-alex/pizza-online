@@ -1,20 +1,22 @@
 "use client";
 
-import { ProductWithRelations } from "@/@types/prisma";
-import { useCartStore } from "@/shared/store";
 import React from "react";
 import toast from "react-hot-toast";
+import { ProductWithRelations } from "@/@types/prisma";
+import { useCartStore } from "@/shared/store";
 import { ChoosePizzaForm } from "./choosePizzaForm";
 import { ChooseProductForm } from "./chooseProductForm";
 
 interface ProductFormProps {
     product: ProductWithRelations;
     onClick?: () => void;
+    isPage?: boolean;
 }
 
 export const ProductForm: React.FC<ProductFormProps> = ({
     product,
     onClick,
+    isPage = false,
 }) => {
     const isPizzaForm = Boolean(product.items[0].pizzaType);
 
@@ -49,6 +51,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             description={product.description ? product.description : undefined}
             onSubmit={onSubmit}
             loading={loading}
+            isPage={isPage}
         />
     ) : (
         <ChooseProductForm
@@ -59,6 +62,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             description={product.description ? product.description : undefined}
             onSubmit={onSubmit}
             loading={loading}
+            isPage={isPage}
         />
     );
 };

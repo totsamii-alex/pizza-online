@@ -26,6 +26,7 @@ interface ChoosePizzaFormProps {
     loading?: boolean;
     onBack?: () => void;
     onSubmit: (itemId: number, ingredients: number[]) => void;
+    isPage?: boolean;
     className?: string;
 }
 
@@ -38,6 +39,7 @@ export const ChoosePizzaForm: React.FC<ChoosePizzaFormProps> = ({
     loading,
     onSubmit,
     onBack,
+    isPage,
     className,
 }) => {
     const {
@@ -68,17 +70,29 @@ export const ChoosePizzaForm: React.FC<ChoosePizzaFormProps> = ({
     };
 
     return (
-        <div className={cn("flex flex-1", className)}>
-            <ProductImage imageUrl={imageUrl} size={size} />
+        <div className={cn("flex flex-1", { "gap-12": isPage })}>
+            <ProductImage
+                className={cn({ "bg-secondary rounded-2xl": isPage })}
+                imageUrl={imageUrl}
+                size={size}
+            />
 
-            <div className="w-[50%] bg-[#F4F1EE] p-7">
+            <div
+                className={cn("w-[50%] bg-[#F4F1EE] p-7", {
+                    "bg-white p-0": isPage,
+                })}
+            >
                 <Title text={name} size={"md"} className="font-bold mb-1" />
 
                 <p className="text-xl">{textDetails}</p>
 
                 {description && <p className="text-gray-400">{description}</p>}
 
-                <div className="flex flex-col gap-2 mt-4">
+                <div
+                    className={cn("flex flex-col gap-2 mt-4", {
+                        "gap-5": isPage,
+                    })}
+                >
                     <GroupVariants
                         items={availableSizes}
                         value={String(size)}
@@ -97,8 +111,19 @@ export const ChoosePizzaForm: React.FC<ChoosePizzaFormProps> = ({
                     className="font-bold mt-7"
                 />
 
-                <div className="bg-gray-50 p-5 h-[420px] overflow-auto scrollbar mt-5">
-                    <div className="grid grid-cols-3 gap-3">
+                <div
+                    className={cn(
+                        "bg-gray-50 p-5 h-[420px] overflow-auto scrollbar mt-5",
+                        {
+                            "bg-white h-[200px]": isPage,
+                        }
+                    )}
+                >
+                    <div
+                        className={cn("grid grid-cols-3 justify-center gap-3", {
+                            "bg-white grid-cols-4": isPage,
+                        })}
+                    >
                         {ingredients.map((ingredient) => (
                             <IngredientItem
                                 key={ingredient.id}

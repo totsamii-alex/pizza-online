@@ -38,7 +38,7 @@ export const IngredientItem: React.FC<Props> = ({
 
             <Image width={110} height={110} src={imageUrl} alt={name} />
             <span className="text-xs mb-1">{name}</span>
-            <span className="font-bold">{price} zł</span>
+            <span className="font-bold mt-auto">{price} zł</span>
         </div>
     );
 };

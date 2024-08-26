@@ -26,10 +26,7 @@ export const ProductImage: React.FC<ProductImageProps> = ({
                 alt="image-product"
                 width={size === 20 ? 300 : size === 30 ? 400 : 500}
                 height={size === 20 ? 300 : size === 30 ? 400 : 500}
-                className={cn(
-                    "relative left-2 top-2 hover:scale-105 transition-all duration-300 z-10",
-                    className
-                )}
+                className="relative left-2 top-2 hover:scale-105 transition-all duration-300 z-10"
                 quality={100}
                 unoptimized
             />
