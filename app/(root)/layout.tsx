@@ -36,9 +36,9 @@ export const metadata: Metadata = {
         ],
     },
     icons: {
-        icon: "/logo.png",
-        shortcut: "/logo.png",
-        apple: "/logo.png",
+        icon: "https://pizza-online-rho.vercel.app/logo.png",
+        shortcut: "https://pizza-online-rho.vercel.app/logo.png",
+        apple: "https://pizza-online-rho.vercel.app/logo.png",
     },
 };
 
