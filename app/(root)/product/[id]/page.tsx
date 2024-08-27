@@ -4,6 +4,7 @@ import {
     ProductForm,
     ProductsGroupList,
 } from "@/shared/components/shared";
+import { Api } from "@/shared/services/apiClient";
 import { notFound } from "next/navigation";
 
 export default async function ProductPage({
@@ -11,39 +12,15 @@ export default async function ProductPage({
 }: {
     params: { id: string };
 }) {
-    const product = await prisma.product.findFirst({
-        where: { id: Number(id) },
-        include: {
-            ingredients: true,
-            category: {
-                include: {
-                    products: {
-                        include: {
-                            items: true,
-                        },
-                    },
-                },
-            },
-            items: true,
-        },
-    });
-
-    const products = await prisma.product.findMany({
-        where: {
-            category: {
-                id: product?.category.id,
-            },
-        },
-        include: {
-            ingredients: true,
-            items: true,
-        },
-        take: 6,
-    });
+    const product = await Api.products.searchProduct(id);
 
     if (!product) {
         return notFound();
     }
+
+    const products = await Api.products.searchProductByCategory(
+        (product?.categoryId).toString()
+    );
 
     return (
         <Container className="flex flex-col mt-10 mb-[125px] g-15">

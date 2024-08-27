@@ -37,7 +37,7 @@ export default function CheckoutLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <main className="min-h-screen bg-[#F4F1EE]">
+        <main className="min-h-screen bg-secondary">
             <Container>
                 <Suspense>
                     <Header

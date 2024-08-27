@@ -35,6 +35,8 @@ export { InfoBlock } from "./infoBlock";
 export { ProfileForm } from "./profileForm";
 export { Stories } from "./stories";
 export { Footer } from "./footer";
+export { OrderList } from "./orderList";
+export { OrderItem } from "./orderItem";
 export * from "./modal";
 export * from "./form";
 export * from "./checkout";

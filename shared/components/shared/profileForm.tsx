@@ -1,20 +1,21 @@
 "use client";
 
+import { updateUserInfo } from "@/app/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { User } from "@prisma/client";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { User } from "@prisma/client";
 import toast from "react-hot-toast";
-import { signOut } from "next-auth/react";
-import { Container } from "./container";
-import { Title } from "./title";
-import { FormInput } from "./form";
 import { Button } from "../ui";
-import { updateUserInfo } from "@/app/actions";
+import { Container } from "./container";
+import { FormInput } from "./form";
 import {
     formRegisterSchema,
     TFormRegisterValues,
 } from "./modal/auth-modal/forms/schemas";
+import { Title } from "./title";
 
 interface Props {
     data: User;
@@ -56,12 +57,18 @@ export const ProfileForm: React.FC<Props> = ({ data }) => {
     };
 
     return (
-        <Container className="my-10">
+        <Container className="mt-10 mb-[125px]">
             <Title
                 text={`Personal information | #${data.id}`}
                 size="md"
                 className="font-bold"
             />
+
+            <Link href={"/checkout/order-history"}>
+                <Button variant={"outline"} className="w-96 mt-10 border">
+                    My orders
+                </Button>
+            </Link>
 
             <FormProvider {...form}>
                 <form

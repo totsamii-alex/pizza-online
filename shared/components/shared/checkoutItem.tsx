@@ -10,6 +10,7 @@ interface CheckoutItemProps extends CartItemProps {
     onClickCountButton?: (type: "plus" | "minus") => void;
     onClickRemove?: () => void;
     className?: string;
+    isOrderHistory?: boolean;
 }
 
 export const CheckoutItem: React.FC<CheckoutItemProps> = ({
@@ -20,6 +21,7 @@ export const CheckoutItem: React.FC<CheckoutItemProps> = ({
     details,
     className,
     disabled,
+    isOrderHistory = false,
     onClickCountButton,
     onClickRemove,
 }) => {
@@ -38,20 +40,29 @@ export const CheckoutItem: React.FC<CheckoutItemProps> = ({
                 <CartItemDetails.Info name={name} details={details} />
             </div>
 
-            <CartItemDetails.Price value={price} />
+            {!isOrderHistory ? (
+                <CartItemDetails.Price value={price} />
+            ) : (
+                <div className="flex flex-col items-right">
+                    <CartItemDetails.Price value={price} />
+                    <p className="text-gray-400">{quantity} pc.</p>
+                </div>
+            )}
 
-            <div className="flex items-center gap-5 ml-20">
-                <CartItemDetails.CountButton
-                    onClick={onClickCountButton}
-                    value={quantity}
-                />
-                <button type="button" onClick={onClickRemove}>
-                    <Trash2Icon
-                        className="text-gray-400 cursor-pointer hover:text-gray-600"
-                        size={20}
+            {!isOrderHistory && (
+                <div className="flex items-center gap-5 ml-20">
+                    <CartItemDetails.CountButton
+                        onClick={onClickCountButton}
+                        value={quantity}
                     />
-                </button>
-            </div>
+                    <button type="button" onClick={onClickRemove}>
+                        <Trash2Icon
+                            className="text-gray-400 cursor-pointer hover:text-gray-600"
+                            size={20}
+                        />
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
