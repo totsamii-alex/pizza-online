@@ -10,6 +10,11 @@ import { Suspense } from "react";
 import { findPizzas } from "@/shared/lib";
 import { GetSearchParams } from "@/shared/lib/findPizzas";
 
+export const metadata = {
+    title: "Main",
+    description: "Main",
+};
+
 export default async function Home({
     searchParams,
 }: {
