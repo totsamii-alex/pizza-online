@@ -133,7 +133,7 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
                         We’re here to help you. Reach out to us anytime.
                     </p>
                     <div className="flex space-x-4 mt-4 md:mt-0">
-                        <a href="/">
+                        <a href="/main">
                             <Globe className="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors" />
                         </a>
                         <a href="/help">

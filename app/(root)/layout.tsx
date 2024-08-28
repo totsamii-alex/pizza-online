@@ -4,42 +4,7 @@ import { Footer } from "@/shared/components/shared";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-    title: "Online Pizza | Main Page",
-    description:
-        "Welcome to Online Pizza, the best place to order your favorite pizzas online! Explore our menu and get your pizza delivered fresh to your doorstep.",
-    keywords: [
-        "pizza",
-        "online pizza",
-        "order pizza",
-        "pizza delivery",
-        "best pizza",
-    ],
-    authors: [
-        {
-            name: "Olekii Rybka",
-            url: "www.linkedin.com/in/oleksii-rybka-aa713b313",
-        },
-    ],
-    openGraph: {
-        title: "Online Pizza | Main Page",
-        description:
-            "Order your favorite pizzas online from Online Pizza. Fresh ingredients, fast delivery, and great taste!",
-        url: "https://pizza-online-rho.vercel.app/open-image.png",
-        type: "website",
-        images: [
-            {
-                url: "",
-                width: 1200,
-                height: 630,
-                alt: "Online Pizza",
-            },
-        ],
-    },
-    icons: {
-        icon: "https://pizza-online-rho.vercel.app/logo.png",
-        shortcut: "https://pizza-online-rho.vercel.app/logo.png",
-        apple: "https://pizza-online-rho.vercel.app/logo.png",
-    },
+    title: "Main Page | Online Pizza",
 };
 
 export default function MainLayout({

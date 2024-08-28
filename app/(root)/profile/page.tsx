@@ -1,7 +1,12 @@
 import { prisma } from "@/prisma/prismaClient";
 import { ProfileForm } from "@/shared/components";
 import { getUserSession } from "@/shared/lib/getUserSession";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+    title: "Profile | Online Pizza",
+};
 
 export default async function ProfilePage() {
     const session = await getUserSession();

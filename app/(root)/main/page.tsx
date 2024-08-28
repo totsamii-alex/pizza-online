@@ -9,10 +9,11 @@ import {
 import { Suspense } from "react";
 import { findPizzas } from "@/shared/lib";
 import { GetSearchParams } from "@/shared/lib/findPizzas";
+import { Metadata } from "next";
 
-export const metadata = {
-    title: "Main",
-    description: "Main",
+export const metadata: Metadata = {
+    title: "Main Page | Online Pizza",
+    description: "Welcome to Online Pizza - the best pizza in town!",
 };
 
 export default async function Home({

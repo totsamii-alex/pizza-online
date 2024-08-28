@@ -1,4 +1,11 @@
 import { Container, InfoBlock } from "@/shared/components";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "Not authorized | Online Pizza",
+    };
+}
 
 export default function UnauthorizedPage() {
     return (

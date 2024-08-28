@@ -8,6 +8,16 @@ const nextConfig = {
             "cdn.dodostatic.net",
         ],
     },
+    // basePath: "/main",
+    async redirects() {
+        return [
+            {
+                source: "/",
+                destination: "/main",
+                permanent: true,
+            },
+        ];
+    },
 };
 
 export default nextConfig;

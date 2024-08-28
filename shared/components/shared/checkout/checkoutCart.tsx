@@ -78,7 +78,7 @@ export const CheckoutCart: React.FC<CheckoutCartProps> = ({
                             className="w-56 h-12 text-base"
                             size="lg"
                             type="button"
-                            onClick={() => (window.location.href = "/")}
+                            onClick={() => (window.location.href = "/main")}
                         >
                             <ArrowLeft className="w-5 mr-2" />
                             Go back to Home

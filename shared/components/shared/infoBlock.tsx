@@ -32,7 +32,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({
                 </div>
 
                 <div className="flex gap-5 mt-11">
-                    <Link href="/">
+                    <Link href="/main">
                         <Button variant="outline" className="gap-2">
                             <ArrowLeft />
                             Home

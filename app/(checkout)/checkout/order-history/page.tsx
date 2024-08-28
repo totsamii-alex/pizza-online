@@ -1,7 +1,14 @@
 import { prisma } from "@/prisma/prismaClient";
 import { OrderList } from "@/shared/components";
 import { getUserSession } from "@/shared/lib/getUserSession";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "Order History | Online Pizza",
+    };
+}
 
 export default async function ProfilePage() {
     const session = await getUserSession();

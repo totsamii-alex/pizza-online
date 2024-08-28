@@ -4,6 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { Container, Title } from "@/shared/components";
 import { axiosInstance } from "@/shared/services/axios";
+import { Metadata } from "next";
 
 export interface PaymentProps {
     payment_status: string;
@@ -20,7 +21,7 @@ export default function PaymentPage({
 
     React.useEffect(() => {
         if (!sessionId) {
-            router.push("/");
+            router.push("/main");
             return;
         }
 
@@ -48,7 +49,7 @@ export default function PaymentPage({
         }
 
         const timer = setTimeout(() => {
-            router.push("/");
+            router.push("/main");
         }, 10000);
 
         return () => clearTimeout(timer);

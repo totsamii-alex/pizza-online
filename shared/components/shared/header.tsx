@@ -31,7 +31,7 @@ export const Header: React.FC<HeaderProps> = ({
     React.useEffect(() => {
         if (searchParams.has("verified")) {
             setTimeout(() => {
-                router.replace("/");
+                router.replace("/main");
                 toast.success("Почта успешно подтверждена!", {
                     duration: 3000,
                 });
@@ -43,7 +43,7 @@ export const Header: React.FC<HeaderProps> = ({
         <header className={cn("border-b", className)}>
             <Container className="flex items-center justify-between py-8">
                 {/* Left side */}
-                <Link href="/">
+                <Link href="/main">
                     <div className="flex items-center gap-4">
                         <Image
                             src="/logo.png"
