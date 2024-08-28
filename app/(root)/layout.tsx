@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         title: "Online Pizza | Main Page",
         description:
             "Order your favorite pizzas online from Online Pizza. Fresh ingredients, fast delivery, and great taste!",
-        url: "https://pizza-online-rho.vercel.app/",
+        url: "https://pizza-online-rho.vercel.app/open-image.png",
         type: "website",
         images: [
             {
