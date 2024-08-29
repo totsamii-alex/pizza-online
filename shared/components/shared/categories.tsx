@@ -13,6 +13,13 @@ interface CategoriesProps {
 export const Categories: React.FC<CategoriesProps> = ({ items, className }) => {
     const activeCategoryId = useCategoryStore((state) => state.activeId);
 
+    const handleScroll = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     return (
         <div
             className={cn(
@@ -21,17 +28,17 @@ export const Categories: React.FC<CategoriesProps> = ({ items, className }) => {
             )}
         >
             {items.map(({ name, id }) => (
-                <a
+                <button
                     className={cn(
                         "flex items-center font-bold h-11 rounded-2xl px-5 hover:bg-white hover:shadow-md hover:shadow-gray-200",
                         activeCategoryId === id &&
                             "bg-white shadow-md shadow-gray-200 text-primary"
                     )}
-                    href={`#${name}`}
+                    onClick={() => handleScroll(name)}
                     key={id}
                 >
-                    <button>{name}</button>
-                </a>
+                    {name}
+                </button>
             ))}
         </div>
     );
