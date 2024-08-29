@@ -16,7 +16,7 @@ export const CheckoutAddressForm: React.FC<CheckoutAddressFormProps> = ({
     className,
 }) => {
     const { control } = useFormContext();
-    const apiKey = "AIzaSyC2-uXMXLQDeVK2K-dcjPqqQfkQ_IdNMK0";
+    const apiKey = process.env.GOOGLE_PLACE_KEY as string;
 
     return (
         <WhiteBlock title="3. Delivery address" className={className}>
