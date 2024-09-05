@@ -13,7 +13,7 @@ interface OrderListProps {
 
 export const OrderList: React.FC<OrderListProps> = ({ orders, className }) => {
     return (
-        <Container className="flex flex-col gap-12 mt-10 h-full">
+        <Container className="flex flex-col gap-12 mt-10 h-full px-3 sm:px-6 lg:px-8 xl:px-0">
             <Title text="My orders" size="2xl" className="font-bold" />
 
             <div className="flex flex-col gap-6 mb-20">

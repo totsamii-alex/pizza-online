@@ -28,20 +28,27 @@ export const CheckoutItem: React.FC<CheckoutItemProps> = ({
     return (
         <div
             className={cn(
-                "flex items-center justify-between",
+                "flex items-center justify-between gap-5 sm:gap-14 lg:gap-20",
                 {
                     "opacity-50 pointer-events-none": disabled,
                 },
                 className
             )}
         >
-            <div className="flex items-center gap-5 flex-1">
-                <CartItemDetails.Image src={imageUrl} />
-                <CartItemDetails.Info name={name} details={details} />
+            <div className="flex items-center gap-3 sm:gap-5 flex-1 self-stretch lg:self-auto">
+                <CartItemDetails.Image src={imageUrl} className="self-center" />
+                <CartItemDetails.Info
+                    name={name}
+                    details={details}
+                    className="self-center basis-full lg:basis-auto"
+                />
             </div>
 
             {!isOrderHistory ? (
-                <CartItemDetails.Price value={price} />
+                <CartItemDetails.Price
+                    value={price}
+                    className="hidden sm:block"
+                />
             ) : (
                 <div className="flex flex-col items-right">
                     <CartItemDetails.Price value={price} />
@@ -50,17 +57,24 @@ export const CheckoutItem: React.FC<CheckoutItemProps> = ({
             )}
 
             {!isOrderHistory && (
-                <div className="flex items-center gap-5 ml-20">
+                <div className="flex flex-col sm:flex-row items-center gap-5 self-stretch justify-between">
                     <CartItemDetails.CountButton
                         onClick={onClickCountButton}
                         value={quantity}
                     />
-                    <button type="button" onClick={onClickRemove}>
-                        <Trash2Icon
-                            className="text-gray-400 cursor-pointer hover:text-gray-600"
-                            size={20}
+                    <div className="flex justify-between self-stretch">
+                        <CartItemDetails.Price
+                            value={price}
+                            className="block sm:hidden"
                         />
-                    </button>
+
+                        <button type="button" onClick={onClickRemove}>
+                            <Trash2Icon
+                                className="text-gray-400 cursor-pointer hover:text-gray-600"
+                                size={20}
+                            />
+                        </button>
+                    </div>
                 </div>
             )}
         </div>

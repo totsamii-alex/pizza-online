@@ -28,10 +28,16 @@ export const ChooseProductForm: React.FC<ChooseProductFormProps> = ({
     onSubmit,
 }) => {
     return (
-        <div className={cn("flex flex-1", { "gap-12": isPage }, className)}>
+        <div
+            className={cn(
+                "flex flex-1 flex-col xl:flex-row",
+                { "gap-12": isPage },
+                className
+            )}
+        >
             <div
                 className={cn(
-                    "flex items-center justify-center flex-1 relative w-full",
+                    "flex items-center justify-center flex-1 relative w-full self-center",
                     { "bg-secondary rounded-2xl": isPage },
                     className
                 )}
@@ -52,7 +58,7 @@ export const ChooseProductForm: React.FC<ChooseProductFormProps> = ({
 
             <div
                 className={cn(
-                    "w-[50%] h-full flex flex-col justify-between bg-[#f6f6f6] p-7",
+                    "w-full xl:w-[50%] h-auto xl:h-full flex flex-col justify-between bg-[#f6f6f6] p-4 sm:p-7",
                     { "h-auto rounded-2xl p-0 bg-white": isPage }
                 )}
             >
@@ -68,7 +74,12 @@ export const ChooseProductForm: React.FC<ChooseProductFormProps> = ({
                     <div className="relative flex items-center z-10">
                         <p className="text-xl">{details}</p>
                         <div className="flex-1 h-px bg-gray-600 mx-4"></div>
-                        <span className={cn("text-xs text-gray-400 uppercase tracking-widest", {"mr-3": isPage})}>
+                        <span
+                            className={cn(
+                                "text-xs text-gray-400 uppercase tracking-widest",
+                                { "mr-3": isPage }
+                            )}
+                        >
                             Details
                         </span>
                     </div>

@@ -68,7 +68,7 @@ const RangeSlider = React.forwardRef(
                             style={{
                                 left: `calc(${
                                     ((value - min) / (max - min)) * 100
-                                }% + 0px)`,
+                                }% - 8px)`,
                                 top: `10px`,
                             }}
                         >

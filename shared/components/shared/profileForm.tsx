@@ -57,7 +57,7 @@ export const ProfileForm: React.FC<Props> = ({ data }) => {
     };
 
     return (
-        <Container className="mt-10 mb-[125px]">
+        <Container className="flex flex-col items-center mt-10 mb-[125px] lg:items-start px-3 sm:px-6 lg:px-8 xl:px-0">
             <Title
                 text={`Personal information | #${data.id}`}
                 size="md"
@@ -65,14 +65,17 @@ export const ProfileForm: React.FC<Props> = ({ data }) => {
             />
 
             <Link href={"/checkout/order-history"}>
-                <Button variant={"outline"} className="w-96 mt-10 border">
+                <Button
+                    variant={"outline"}
+                    className="w-80 sm:w-96 mt-10 border"
+                >
                     My orders
                 </Button>
             </Link>
 
             <FormProvider {...form}>
                 <form
-                    className="flex flex-col gap-5 w-96 mt-10"
+                    className="flex flex-col gap-5 w-80 sm:w-96 mt-10"
                     onSubmit={form.handleSubmit(onSubmit)}
                 >
                     <FormInput name="email" label="E-Mail" required />

@@ -70,15 +70,22 @@ export const ChoosePizzaForm: React.FC<ChoosePizzaFormProps> = ({
     };
 
     return (
-        <div className={cn("flex flex-1", { "gap-12": isPage })}>
+        <div
+            className={cn("flex flex-1 flex-col xl:flex-row", {
+                "gap-12": isPage,
+            })}
+        >
             <ProductImage
-                className={cn({ "bg-secondary rounded-2xl": isPage })}
+                className={cn(
+                    " w-full h-[400px] shrink-0 basis-auto self-center xl:w-auto xl:h-auto",
+                    { "bg-secondary rounded-2xl": isPage }
+                )}
                 imageUrl={imageUrl}
                 size={size}
             />
 
             <div
-                className={cn("w-[50%] bg-[#F4F1EE] p-7", {
+                className={cn("w-full xl:w-[50%] bg-[#F4F1EE] p-4 sm:p-7", {
                     "bg-white p-0": isPage,
                 })}
             >
@@ -120,9 +127,12 @@ export const ChoosePizzaForm: React.FC<ChoosePizzaFormProps> = ({
                     )}
                 >
                     <div
-                        className={cn("grid grid-cols-3 justify-center gap-3", {
-                            "bg-white grid-cols-4": isPage,
-                        })}
+                        className={cn(
+                            "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 justify-center gap-4",
+                            {
+                                "bg-white grid-cols-4": isPage,
+                            }
+                        )}
                     >
                         {ingredients.map((ingredient) => (
                             <IngredientItem

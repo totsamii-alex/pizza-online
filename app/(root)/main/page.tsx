@@ -25,7 +25,7 @@ export default async function Home({
 
     return (
         <>
-            <Container className="mt-10">
+            <Container className="mt-10 px-3 sm:px-6 lg:px-8">
                 <Title text="All orders" size="lg" className="font-extrabold" />
             </Container>
 
@@ -37,10 +37,10 @@ export default async function Home({
 
             <Stories />
 
-            <Container className="mt-10 pb-14">
-                <div className="flex gap-20">
+            <Container className="mt-5 xl:mt-10 pb-7 xl:pb-14 px-3 sm:px-6 lg:px-8 xl:px-0">
+                <div className="flex flex-col xl:flex-row gap-10 xl:gap-20">
                     {/* left side - filtration */}
-                    <div className="w-[250px]">
+                    <div className="w-full xl:w-[250px]">
                         <Suspense>
                             <Filters max={150} min={0} />
                         </Suspense>

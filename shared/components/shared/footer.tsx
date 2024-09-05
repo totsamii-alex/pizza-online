@@ -22,8 +22,8 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
         <footer
             className={cn("border-t border-gray-200 bg-gray-100", className)}
         >
-            <Container className="py-8">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-6 md:space-y-0">
+            <Container className="flex flex-col lg:items-start py-8 px-3 sm:px-6 lg:px-8 xl:px-0">
+                <div className="flex flex-col xl:flex-row justify-between items-start md:items-center space-y-6 md:space-y-0 flex-wrap xl:flex-nowrap">
                     {/* About Section */}
                     <div className="flex flex-col space-y-4">
                         <h2 className="text-xl font-bold">About Us</h2>
@@ -32,7 +32,7 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
                             quality. Our team of experts is here to ensure your
                             satisfaction.
                         </p>
-                        <div className="flex space-x-4">
+                        <div className="flex space-x-4 self-center xl:self-start">
                             <a
                                 href="https://facebook.com"
                                 aria-label="Facebook"

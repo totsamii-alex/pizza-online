@@ -38,25 +38,26 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, className }) => {
 
     const items: [] = JSON.parse(order.items as string);
     return (
-        <div className="flex flex-col w-[70%] py-5 px-8 bg-white rounded-3xl">
+        <div className="flex flex-col w-full lg:w-[70%] py-5 px-[15px] sm:px-8 bg-white rounded-3xl">
             <div
-                className="flex justify-between items-center cursor-pointer"
+                className="flex items-stretch justify-between sm:items-center cursor-pointer"
                 onClick={toggleOpen}
             >
-                <div className="flex items-center gap-8">
+                <div className="flex flex-col items-start justify-between sm:flex-row gap-2 sm:items-center sm:gap-8">
                     <Title
                         text={"Order #" + order.id}
-                        size="md"
-                        className="font-bold"
+                        className="font-bold text-[18px] sm:text-[26px]"
                     />
 
-                    <span>{formatDate(order.createdAt.toString())}</span>
+                    <span className="text-[12px] sm:text-[16px]">
+                        {formatDate(order.createdAt.toString())}
+                    </span>
                 </div>
 
-                <div className="flex items-center gap-8">
+                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-8">
                     <p
                         className={cn(
-                            "py-2 px-4 rounded-2xl",
+                            "py-2 px-4 rounded-2xl text-[12px] sm:text-[16px]",
                             {
                                 "bg-green-200 text-green-600":
                                     order.status === "SUCCEEDED",
@@ -93,7 +94,7 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, className }) => {
                     isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
                 )}
             >
-                <div className="flex flex-col gap-5 my-5 p-5 border-t border-b border-gray-300">
+                <div className="flex flex-col gap-5 my-5 px-0 sm:p-5 border-t border-b border-gray-300">
                     {JSON.parse(order.items as string).map(
                         (item: ICartStateItem) => (
                             <CheckoutItem

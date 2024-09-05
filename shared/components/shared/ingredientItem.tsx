@@ -23,7 +23,7 @@ export const IngredientItem: React.FC<Props> = ({
     return (
         <div
             className={cn(
-                "flex items-center flex-col p-1 rounded-md w-32 text-center relative cursor-pointer shadow-md bg-white transition-transform transform-gpu",
+                "flex items-center flex-col p-1 rounded-md w-full xl:w-32 text-center relative cursor-pointer shadow-md bg-white transition-transform transform-gpu",
                 {
                     "outline outline-2 outline-[hsl(22,100%,50%)]": active,
                     "hover:shadow-lg hover:scale-105": !active,

@@ -11,7 +11,7 @@ export const CheckoutPersonalForm: React.FC<CheckoutPersonalFormProps> = ({
 }) => {
     return (
         <WhiteBlock title="2. Personal data" className={className}>
-            <div className="grid grid-cols-2 gap-5">
+            <div className="flex flex-col md:grid md:grid-cols-2 gap-5">
                 <FormInput
                     name="firstName"
                     className="text-base"

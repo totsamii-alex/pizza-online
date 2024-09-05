@@ -31,7 +31,7 @@ export default async function ProductPage({
     );
 
     return (
-        <Container className="flex flex-col mt-10 mb-[125px] g-15">
+        <Container className="flex flex-col mt-10 mb-[125px] g-15 px-3 sm:px-6 lg:px-8 xl:px-0">
             <div>
                 <p className="text-sm text-gray-400 mb-6">
                     <span className="font-bold">Main</span> /{" "}

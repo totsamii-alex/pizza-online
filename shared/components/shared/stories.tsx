@@ -39,7 +39,7 @@ export const Stories: React.FC<Props> = ({ className }) => {
         <>
             <Container
                 className={cn(
-                    "flex items-center justify-between gap-2 my-10",
+                    "flex gap-3 my-10 px-3 sm:px-6 lg:px-8 xl:px-0 overflow-x-scroll scrollbar-none",
                     className
                 )}
             >
@@ -47,7 +47,7 @@ export const Stories: React.FC<Props> = ({ className }) => {
                     [...Array(6)].map((_, index) => (
                         <div
                             key={index}
-                            className="w-[200px] h-[250px] bg-gray-200 rounded-md animate-pulse"
+                            className="w-[200px] h-[250px] shrink-0 basis-auto bg-gray-200 rounded-md animate-pulse"
                         />
                     ))}
 
@@ -55,7 +55,7 @@ export const Stories: React.FC<Props> = ({ className }) => {
                     <img
                         key={story.id}
                         onClick={() => onClickStory(story)}
-                        className="rounded-md cursor-pointer w-[100%] h-auto max-w-[200px] max-h-[250px] object-cover object-top hover:scale-105 transition-all duration-200"
+                        className="rounded-md cursor-pointer w-[100%] h-auto max-w-[200px] max-h-[250px] shrink-0 basis-auto object-cover object-top hover:scale-105 transition-all duration-200"
                         src={story.previewImageUrl}
                         alt={`Story ${story.id}`}
                     />
@@ -67,7 +67,7 @@ export const Stories: React.FC<Props> = ({ className }) => {
                         onClick={() => setOpen(false)}
                     >
                         <div
-                            className="relative max max-w-[30%] max-h-[80%] overflow-hidden"
+                            className="relative w-[90%] h-[90%] sm:w-[65%] sm:h-[60%] lg:max-w-[30%] lg:max-h-[80%] overflow-hidden"
                             onClick={(
                                 event: React.MouseEvent<HTMLDivElement>
                             ) => event.stopPropagation()}

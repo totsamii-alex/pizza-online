@@ -4,6 +4,7 @@ import React from "react";
 import { FilterCheckboxProps } from "./filterCheckbox";
 import { Input, Skeleton } from "../ui";
 import { FilterCheckbox } from ".";
+import { cn } from "@/shared/lib/utils";
 
 type Item = FilterCheckboxProps;
 
@@ -18,6 +19,7 @@ interface CheckboxFiltersGroupProps {
     defaultValues?: string[];
     selected?: Set<string>;
     name: string;
+    classNameIngredients?: string;
     className?: string;
 }
 
@@ -31,6 +33,7 @@ export const CheckboxFiltersGroup: React.FC<CheckboxFiltersGroupProps> = ({
     onClickCheckbox,
     selected,
     name,
+    classNameIngredients,
     className,
 }) => {
     const [showAll, setShowAll] = React.useState(false);
@@ -78,7 +81,12 @@ export const CheckboxFiltersGroup: React.FC<CheckboxFiltersGroupProps> = ({
                 </div>
             )}
 
-            <div className="flex flex-col gap-1 max-h-96 pr-2 overflow-auto scrollbar">
+            <div
+                className={cn(
+                    "flex flex-col gap-1 max-h-96 pr-2 overflow-auto scrollbar",
+                    classNameIngredients
+                )}
+            >
                 {list.map((item, index) => (
                     <FilterCheckbox
                         key={index}

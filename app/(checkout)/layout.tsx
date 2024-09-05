@@ -13,7 +13,7 @@ export default function CheckoutLayout({
 }>) {
     return (
         <main className="min-h-screen bg-secondary">
-            <Container>
+            <Container className="px-3 sm:px-6 lg:px-8 xl:px-0">
                 <Suspense>
                     <Header
                         hasSearch={false}

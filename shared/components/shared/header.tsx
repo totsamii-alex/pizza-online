@@ -32,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
         if (searchParams.has("verified")) {
             setTimeout(() => {
                 router.replace("/main");
-                toast.success("Почта успешно подтверждена!", {
+                toast.success("Email successfully verified!", {
                     duration: 3000,
                 });
             }, 1000);
@@ -41,10 +41,10 @@ export const Header: React.FC<HeaderProps> = ({
 
     return (
         <header className={cn("border-b", className)}>
-            <Container className="flex items-center justify-between py-8">
+            <Container className="flex items-center justify-between p-3 sm:py-6 lg:py-8 flex-wrap sm:flex-nowrap gap-y-4 sm:gap-y-0">
                 {/* Left side */}
-                <Link href="/main">
-                    <div className="flex items-center gap-4">
+                <Link href="/main" className="order-1">
+                    <div className="flex items-center gap-2 sm:gap-4">
                         <Image
                             src="/logo.png"
                             alt="Logo"
@@ -52,10 +52,10 @@ export const Header: React.FC<HeaderProps> = ({
                             height={35}
                         />
                         <div>
-                            <h1 className="text-2xl uppercase font-black">
+                            <h1 className="text-sm sm:text-2xl uppercase font-black w-12 sm:w-auto">
                                 Online Pizza
                             </h1>
-                            <p className="text-sm text-gray-400 leading-3">
+                            <p className="text-sm text-gray-400 leading-3 hidden sm:block">
                                 as good as it gets
                             </p>
                         </div>
@@ -63,13 +63,13 @@ export const Header: React.FC<HeaderProps> = ({
                 </Link>
 
                 {hasSearch && (
-                    <div className="mx-10 flex-1">
+                    <div className="mx-0 flex-1 sm:mx-5 md:mx-10 order-3 sm:order-2 basis-full sm:basis-auto">
                         <SearchInput />
                     </div>
                 )}
 
                 {/* Right side */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-[5px] sm:gap-3 order-2 sm:order-3">
                     <AuthModal
                         open={openAuthModal}
                         onClose={() => setOpenAuthModal(false)}

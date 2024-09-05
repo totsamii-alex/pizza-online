@@ -78,16 +78,16 @@ export default function CheckoutPage() {
     };
 
     return (
-        <Container className="mt-10">
+        <div className="mt-6 xl:mt-10">
             <Title
                 text="Placing an order"
-                className="font-extrabold mb-8 text-[36px]"
+                className="font-extrabold mb-3 xl:mb-8 text-[24px] lg:text-[36px]"
             />
 
             <FormProvider {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className="flex gap-10">
-                        <div className="flex flex-col gap-10 flex-1 mb-20">
+                    <div className="flex flex-col lg:flex-row gap-10">
+                        <div className="flex flex-col gap-10 flex-1 lg:mb-20">
                             <CheckoutCart
                                 onClickCountButton={onClickCountButton}
                                 removeCartItem={removeCartItem}
@@ -112,7 +112,7 @@ export default function CheckoutPage() {
                             />
                         </div>
 
-                        <div className="w-[450px]">
+                        <div className="w-full lg:w-[340px] xl:w-[450px]">
                             <CheckoutSidebar
                                 totalAmount={totalAmount}
                                 loading={loading || submitting}
@@ -121,6 +121,6 @@ export default function CheckoutPage() {
                     </div>
                 </form>
             </FormProvider>
-        </Container>
+        </div>
     );
 }
