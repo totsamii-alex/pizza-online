@@ -94,7 +94,7 @@ export const OrderItem: React.FC<OrderItemProps> = ({ order, className }) => {
                     isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
                 )}
             >
-                <div className="flex flex-col gap-5 my-5 px-0 sm:p-5 border-t border-b border-gray-300">
+                <div className="flex flex-col gap-5 my-5 py-5 px-0 sm:px-5 border-t border-b border-gray-300">
                     {JSON.parse(order.items as string).map(
                         (item: ICartStateItem) => (
                             <CheckoutItem

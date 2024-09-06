@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { Title } from "./title";
 import Link from "next/link";
 import { cn } from "@/shared/lib/utils";
+import Image from "next/image";
 
 interface InfoBlockProps {
     title: string;
@@ -22,16 +23,16 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({
         <div
             className={cn(
                 className,
-                "flex items-center justify-between w-[840px] gap-12"
+                "flex flex-col lg:flex-row items-center justify-between w-full lg:w-[840px] gap-12"
             )}
         >
             <div className="flex flex-col">
-                <div className="w-[445px]">
+                <div className="sm:w-[445px] text-center mx-auto lg:text-left">
                     <Title size="lg" text={title} className="font-extrabold" />
                     <p className="text-gray-400 text-lg">{text}</p>
                 </div>
 
-                <div className="flex gap-5 mt-11">
+                <div className="flex gap-5 mt-10 mx-auto lg:mx-0">
                     <Link href="/main">
                         <Button variant="outline" className="gap-2">
                             <ArrowLeft />
@@ -49,7 +50,12 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({
                 </div>
             </div>
 
-            <img src={imageUrl} alt={title} width={300} />
+            <Image
+                src={imageUrl as string}
+                alt={title}
+                width={300}
+                height={350}
+            />
         </div>
     );
 };

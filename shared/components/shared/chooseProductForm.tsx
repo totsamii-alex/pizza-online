@@ -42,17 +42,13 @@ export const ChooseProductForm: React.FC<ChooseProductFormProps> = ({
                     className
                 )}
             >
-                <Image
+                <img
                     src={imageUrl}
                     alt="image-product"
-                    width={350}
-                    height={350}
                     className={cn(
-                        "relative left-2 top-2 hover:scale-105 transition-all duration-300 z-10",
+                        "relative left-2 top-2 hover:scale-105 transition-all duration-300 z-10 w-[300px] h-[300px] sm:w-[350px] sm:h-[350px]",
                         className
                     )}
-                    quality={100}
-                    unoptimized
                 />
             </div>
 

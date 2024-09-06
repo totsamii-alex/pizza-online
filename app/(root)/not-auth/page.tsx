@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function UnauthorizedPage() {
     return (
-        <Container className="flex flex-col items-center justify-center my-40">
+        <Container className="flex flex-col items-center justify-center my-16 lg:my-40 px-3 sm:px-6 lg:px-8 xl:px-0">
             <InfoBlock
                 title="Access denied"
                 text="This page can only be viewed by authorized users"

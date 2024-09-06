@@ -2,14 +2,16 @@
 
 import Image from "next/image";
 import React from "react";
+import toast from "react-hot-toast";
 import { Button } from "@/shared/components";
-import { signIn } from "next-auth/react";
+import { signIn, SignInResponse } from "next-auth/react";
 import { LoginForm } from "./forms/loginForm";
 import { RegisterForm } from "./forms/registerForm";
 
 import { Dialog } from "@/shared/components/ui";
 import { DialogContent } from "@/shared/components/ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { cn } from "@/shared/lib/utils";
 
 interface AuthModalProps {
     open: boolean;
@@ -27,10 +29,31 @@ export const AuthModal: React.FC<AuthModalProps> = ({ open, onClose }) => {
         onClose();
     };
 
+    const handleSocialSignIn = async (provider: string) => {
+        try {
+            const sign = signIn(provider, {
+                callbackUrl: "/main",
+                redirect: true,
+            });
+        } catch (err) {
+            toast.error(
+                "An error occurred while trying to log into your account.",
+                {
+                    icon: "❌",
+                }
+            );
+        }
+    };
+
     return (
         <Dialog open={open} onOpenChange={handleClose}>
             <DialogTitle className="hidden" />
-            <DialogContent className="w-[450px] bg-white p-10">
+            <DialogContent
+                className={cn(
+                    "w-[90%] h-[90%] sm:w-[450px] overflow-y-auto bg-white p-10 rounded-md border-black border-[1px]",
+                    type === "login" ? "max-h-[600px]" : "max-h-[800px]"
+                )}
+            >
                 {type === "login" ? (
                     <LoginForm onClose={handleClose} />
                 ) : (
@@ -42,12 +65,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ open, onClose }) => {
                 <div className="flex gap-2">
                     <Button
                         variant="secondary"
-                        onClick={() =>
-                            signIn("github", {
-                                callbackUrl: "/main",
-                                redirect: true,
-                            })
-                        }
+                        onClick={() => handleSocialSignIn("github")}
                         type="button"
                         className="gap-2 h-12 p-2 flex-1"
                     >
@@ -62,12 +80,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ open, onClose }) => {
 
                     <Button
                         variant="secondary"
-                        onClick={() =>
-                            signIn("google", {
-                                callbackUrl: "/main",
-                                redirect: true,
-                            })
-                        }
+                        onClick={() => handleSocialSignIn("google")}
                         type="button"
                         className="gap-2 h-12 p-2 flex-1"
                     >
