@@ -26,7 +26,11 @@ export const ChooseProductModal: React.FC<ChooseProductModalProps> = ({
                 <DialogContent
                     className={cn(
                         "w-[90%] h-[95%] rounded-md border-black border-[1px] overflow-y-auto p-0 xl:w-[1060px] xl:max-w-[1060px] xl:max-h-[820px] bg-white",
-                        { "h-min": !Boolean(product.items[0].pizzaType) },
+                        {
+                            "xl:h-[450px]": !Boolean(
+                                product.items[0].pizzaType
+                            ),
+                        },
                         className
                     )}
                 >
