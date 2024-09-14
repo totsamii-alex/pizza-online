@@ -68,26 +68,24 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
                     <div className="flex items-center space-x-3">
                         <Mail className="w-6 h-6 text-gray-400" />
                         <a
-                            href="mailto:alexrybka.ru@gmail.com"
+                            href="mailto:flavorwebstudio@gmail.com"
                             className="text-gray-400 hover:text-gray-100"
                         >
-                            alexrybka.ru@gmail.com
+                            flavorwebstudio@gmail.com
                         </a>
                     </div>
                     <div className="flex items-center space-x-3">
                         <Phone className="w-6 h-6 text-gray-400" />
                         <a
-                            href="tel:+1234567890"
+                            href="tel:+48732622324"
                             className="text-gray-400 hover:text-gray-100"
                         >
-                            +123 456 7890
+                            +48 732 622 324
                         </a>
                     </div>
                     <div className="flex items-center space-x-3">
                         <MapPin className="w-6 h-6 text-gray-400" />
-                        <p className="text-gray-400">
-                            1234 Street Name, City, Country
-                        </p>
+                        <p className="text-gray-400">Kraków, Poland</p>
                     </div>
                 </div>
 
